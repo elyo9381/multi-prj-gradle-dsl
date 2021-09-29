@@ -19,7 +19,7 @@ allprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "11"
+            jvmTarget = "1.8"
         }
     }
 
@@ -48,7 +48,9 @@ subprojects {
 
 }
 
+//
+//rootProject.subprojects.forEach { subproject ->
+//    "api-".filter { !subproject.name.startsWith(it) }.map { subproject.tasks["bootJar"].enabled = false }
+//}
+//
 
-rootProject.subprojects.forEach { subproject ->
-    "api-".filter { !subproject.name.startsWith(it) }.map { subproject.tasks["bootJar"].enabled = false }
-}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movv.admin.mapper.AdminMemberMapper">
+
+    <select id="getList" parameterType="com.movv.core.dto.MemberSearchDTO" resultType="com.movv.core.dto.MemberDTO">
+        <![CDATA[
+        select * from
+                     members m
+        where true
+        ]]>
+        <if test='name != null and name !=""'>
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test='description != null and description !=""'>
+            and description like concat('%', #{description}, '%')
+
+        order by mbno asc
+        limit #{start} , #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" parameterType="com.movv.core.dto.MemberSearchDTO" resultType="long">
+        <![CDATA[
+        SELECT count(*) FROM members m where true
+        ]]>
+            <if test='name != null and name != ""'>
+                and title LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test='description != null and description != ""'>
+                and description LIKE CONCAT('%',#{description},'%')
+            </if>
+
+    </select>
+
+
+
+
+</mapper>
+
+

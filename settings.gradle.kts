@@ -5,7 +5,6 @@ pluginManagement {
     }
 }
 
-
 val GRADLE_TEXT = """
 
     dependencies {
