@@ -48,9 +48,12 @@ subprojects {
 
 }
 
-//
-//rootProject.subprojects.forEach { subproject ->
-//    "api-".filter { !subproject.name.startsWith(it) }.map { subproject.tasks["bootJar"].enabled = false }
-//}
-//
+
+rootProject.subprojects.forEach { subproject ->
+    "api-".filter { !subproject.name.startsWith(it) }.map {
+        subproject.tasks["bootJar"].enabled = false
+        subproject.tasks["jar"].enabled = true
+
+    }
+}
 

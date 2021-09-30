@@ -1,6 +1,6 @@
 package com.movv.admin.act
 
-import com.movv.admin.biz.memberBiz
+import com.movv.admin.biz.MemberBiz
 import com.movv.core.dto.MemberDTO
 import com.movv.core.dto.MemberSearchDTO
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-@RequestMapping("/admin/member/")
-class memberAct {
-
-
-    @Autowired private lateinit var memberBiz: memberBiz
+@RequestMapping("/admin/member")
+class MemberAct {
+    @Autowired private lateinit var memberBiz: MemberBiz
 
     @PostMapping("/list")
     fun list(@RequestBody search: MemberSearchDTO): PageImpl<MemberDTO> {

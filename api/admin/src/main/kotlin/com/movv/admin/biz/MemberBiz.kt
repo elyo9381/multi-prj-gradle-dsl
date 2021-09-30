@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class memberBiz {
+class MemberBiz {
 
 
     @Autowired private lateinit var memberRepository: MemberRepository

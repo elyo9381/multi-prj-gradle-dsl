@@ -52,6 +52,7 @@ class JpaConfig() {
     @Primary
     fun movvdataSource(): DataSource {
         val source = HikariDataSource(movvHikariConfig())
+
         return source
     }
 
