@@ -3,5 +3,7 @@ server:
 spring:
   profiles:
     active: local
-  main:
-    allow-bean-definition-overriding: true
+  mvc:
+    converters.preferred-json-mapper: "gson"
+    format.date-time: "yyyy-MM-dd HH:mm:ss"
+  gson.date-format: "yyyy-MM-dd HH:mm:ss"

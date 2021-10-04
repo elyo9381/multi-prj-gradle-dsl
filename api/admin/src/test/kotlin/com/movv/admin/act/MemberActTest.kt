@@ -1,46 +1,50 @@
 package com.movv.admin.act
 
 import com.google.gson.JsonObject
-import com.movv.admin.biz.MemberBiz
-import com.movv.core.mapstruct.MemberMapStruct
-import io.mockk.junit5.MockKExtension
-import io.mockk.mockk
+import com.movv.core.entity.MemberEntity
+import com.movv.core.repository.MemberRepository
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.mapstruct.factory.Mappers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
+
 @AutoConfigureMockMvc
-@ExtendWith(MockKExtension::class)
+@SpringBootTest
 internal class MemberActTest{
 
 
-    val memberMapStruct = Mappers.getMapper(MemberMapStruct::class.java)
-
-    @TestConfiguration
-    class ControllerTestConfig {
-        @Bean
-        fun memberBiz() = mockk<MemberBiz>()
-    }
 
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @Autowired
-    private  lateinit var memberBiz: MemberBiz
+    @Autowired()
+    private  lateinit var memberRepository: MemberRepository
 
 
     @Test
-    fun `Spring context loaded`() {
+    fun voidTest() {
+
+        val toEntity = MemberEntity().apply {
+            this.userId = "testId"
+            this.userPw = "testpw"
+            this.name = "testwon"
+            this.email = "test@mail.com"
+            this.gender = "M"
+            this.tel = "00011112222"
+        }
+
+
+        val save = memberRepository.save(toEntity)
+
+        Assertions.assertNotNull(save)
+        Assertions.assertEquals("testId", save.userId)
+
     }
 
 
@@ -51,14 +55,14 @@ internal class MemberActTest{
             MockMvcRequestBuilders.post("/admin/member/save")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
-//                    JsonObject().apply {
-//                        this.addProperty("userId", "testId")
-//                        this.addProperty("userPw", "testpw")
-//                        this.addProperty("name", "testwon")
-//                        this.addProperty("email", "test@mail.com")
-//                        this.addProperty("gender", "M")
-//                        this.addProperty("tel", "00011112222")
-//                    }.toString()
+                    JsonObject().apply {
+                        this.addProperty("userId", "testId2")
+                        this.addProperty("userPw", "testpw")
+                        this.addProperty("name", "testwon")
+                        this.addProperty("email", "test@mail.com")
+                        this.addProperty("gender", "M")
+                        this.addProperty("tel", "00011112222")
+                    }.toString()
                 )
         ).andExpect(MockMvcResultMatchers.status().isOk)
             .andReturn()

@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.movv.core","com.movv.admin"])
-@EnableJpaRepositories(basePackages = ["com.movv.core"])
-@Import(*[JpaConfig::class])
+//@EnableJpaRepositories(basePackages = ["com.movv.core"])
+//@Import(*[JpaConfig::class])
 class AdminApplication
 
 
